@@ -5,6 +5,7 @@ import { Data } from './components/Data'
 import { Auth } from './components/Auth'
 import { Home } from './components/Home'
 import { Germs } from './components/Germs';
+import { Setting } from './components/Setting';
 
 function App() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/home" element={<Home/>} />
         <Route path="/germs" element={<Germs/>} />
         <Route path="/data" element={<Data/>} />
+        <Route path="/Setting" element={<Setting/>} />
       </Routes>
     </BrowserRouter>
   )
