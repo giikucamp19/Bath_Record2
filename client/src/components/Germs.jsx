@@ -1,15 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+// import axios from "axios";
 
 export const Germs = () => {
   //お風呂キャンセル日数を保持する変数
   const bathCancelDays = 1;
   // const [bathCancelDays, setBathCancelDays] = useState(7);
-  //キャンセルした日数によって表示する菌のstate
-  const [germ, setGerm] = useState(0);
+  //キャンセルした日数によって表示する菌の数
+  const germ = useMemo(() => bathCancelDays * 10, [bathCancelDays]);
+  // アカウント名
+  // const name = useRef();
+  // アカウントアイコン
+  // const icon = useRef();
+
+  // バックエンドからアカウント名とアイコンを取得する処理
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get("/api/endpoint");
+  //     name.current = response.data.name;
+  //     icon.current = response.data.icon;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
-    setGerm(bathCancelDays * 10);
-  }, [bathCancelDays]);
+    // fetchData();
+  }, [germ]);
 
   return (
     <div>
