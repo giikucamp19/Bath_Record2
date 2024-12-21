@@ -4,6 +4,7 @@ import (
 	model "bath_record/models"
 	"bath_record/repository"
 	"bath_record/validator"
+	"encoding/base64"
 	"os"
 	"time"
 
@@ -14,6 +15,7 @@ import (
 type IUserUsecase interface {
 	SignUp(user model.User) (model.UserResponse, error)
 	Login(user model.User) (string, error)
+	GetUserByID(userID uint) (model.UserResponse, error)
 }
 
 type userUsecase struct {
@@ -33,16 +35,30 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 	if err != nil {
 		return model.UserResponse{}, err
 	}
-	newUser := model.User{Email: user.Email, Password: string(hash), AccountName: user.AccountName, IconImage: user.IconImage}
+
+	newUser := model.User{
+		Email:       user.Email,
+		Password:    string(hash),
+		AccountName: user.AccountName,
+		IconImage:   user.IconImage,
+	}
+
 	if err := uu.ur.CreateUser(&newUser); err != nil {
 		return model.UserResponse{}, err
 	}
+
+	var base64Icon string
+	if len(newUser.IconImage) > 0 {
+		base64Icon = base64.StdEncoding.EncodeToString(newUser.IconImage)
+	}
+
 	resUser := model.UserResponse{
 		ID:          newUser.ID,
 		Email:       newUser.Email,
 		AccountName: newUser.AccountName,
-		IconImage:   newUser.IconImage,
+		IconImage:   base64Icon,
 	}
+
 	return resUser, nil
 }
 
@@ -67,4 +83,23 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 		return "", err
 	}
 	return tokenString, nil
+}
+
+func (uu *userUsecase) GetUserByID(userID uint) (model.UserResponse, error) {
+	u := model.User{}
+	if err := uu.ur.GetUserByID(&u, userID); err != nil {
+		return model.UserResponse{}, err
+	}
+
+	var base64Icon string
+	if len(u.IconImage) > 0 {
+		base64Icon = base64.StdEncoding.EncodeToString(u.IconImage)
+	}
+
+	return model.UserResponse{
+		ID:          u.ID,
+		Email:       u.Email,
+		AccountName: u.AccountName,
+		IconImage:   base64Icon,
+	}, nil
 }

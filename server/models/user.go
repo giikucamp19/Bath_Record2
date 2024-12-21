@@ -16,5 +16,5 @@ type UserResponse struct {
 	ID          uint   `json:"id" gorm:"primaryKey"`
 	Email       string `json:"email" gorm:"unique"`
 	AccountName string `json:"accountname"`
-	IconImage   []byte `json:"iconimage"`
+	IconImage   string `json:"iconimage"`
 }
