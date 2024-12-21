@@ -1,6 +1,7 @@
 // import { useEffect } from "react";
 // import axios from "axios";
 import { Cog8ToothIcon } from "@heroicons/react/24/solid";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   // アカウント名
@@ -26,7 +27,9 @@ export const Header = () => {
     <div>
       <header className="bg-blue-400 flex items-center justify-between px-4 py-2 mb-8">
         <h1 className="text-white text-lg font-bold">お風呂記録アプリ</h1>
-        <Cog8ToothIcon className="h-6 w-6 my-2 text-black-500" />
+        <Link to="/Setting">
+          <Cog8ToothIcon className="h-6 w-6 my-2 text-black-500" />
+        </Link>
       </header>
     </div>
   );
