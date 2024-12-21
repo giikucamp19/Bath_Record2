@@ -52,26 +52,36 @@ export const Data = ({ isBathed }) => {
   }
 
   const latestState = filtered[filtered.length - 1];
+  const consecutiveBathingDays = calcConsecutiveBathingDays(filtered);
+  const consecutiveCancelDays = calcConsecutiveCancelDays(filtered);
+  const cancelationRate = calcCancelationRate(filtered);
 
   if (latestState === true) {
     return (
       <>
         <br></br>
-        <div className="text-center">
+        <div className="flex justify-center items-center">
           <span className='font-semibold'>
             今月のキャンセル率{"　"}
           </span>
-          <span className='text-3xl text-center text-red-600 font-semibold'>
-            {calcCancelationRate(filtered)}%
-          </span>
-          <br></br>
+          <div className="relative w-48 h-48">
+            <div className="absolute inset-0 rounded-full" 
+              style={{ background: `conic-gradient( #f08080 ${cancelationRate * 3.6}deg, #e0e0e0 ${cancelationRate * 3.6}deg ${360 - cancelationRate * 3.6}deg )` }}>
+            </div> 
+            <div className="absolute inset-0 flex justify-center items-center text-xl font-semibold text-gray-800">
+              {cancelationRate}% 
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center items-center">
           <span className='font-semibold'>
             連続入浴記録{"　"}
           </span>
           <span className='text-3xl text-center text-green-600 font-semibold'>
-            {calcConsecutiveBathingDays(filtered)}日
+            {consecutiveBathingDays}日
           </span>
-          <br></br>
+        </div>
+        <div className="flex justify-center items-center">
           <span className='text-2xl font-semibold'>
             この調子で頑張りましょう！
           </span>
@@ -83,21 +93,28 @@ export const Data = ({ isBathed }) => {
     return (
       <>
         <br></br>
-        <div className="text-center">
+        <div className="flex justify-center items-center">
           <span className='font-semibold'>
             今月のキャンセル率{"　"}
           </span>
-          <span className='text-3xl text-center text-red-600 font-semibold'>
-            {calcCancelationRate(filtered)}%
-          </span>
-          <br></br>
+          <div className="relative w-48 h-48">
+            <div className="absolute inset-0 rounded-full" 
+              style={{ background: `conic-gradient( #f08080 ${cancelationRate * 3.6}deg, #e0e0e0 ${cancelationRate * 3.6}deg ${360 - cancelationRate * 3.6}deg )` }}>
+            </div> 
+            <div className="absolute inset-0 flex justify-center items-center text-xl font-semibold text-gray-800">
+              {cancelationRate}% 
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center items-center">
           <span className='font-semibold'>
-            連続キャンセル記録{"　"}
+            連続キャンセル日数{"　"}
           </span>
           <span className='text-3xl text-center text-red-600 font-semibold'>
-            {calcConsecutiveCancelDays(filtered)}日
+            {consecutiveCancelDays}日
           </span>
-          <br></br>
+        </div>
+        <div className="flex justify-center items-center">
           <span className='text-2xl font-semibold'>
             毎日お風呂に入りましょう...
           </span>
@@ -106,4 +123,4 @@ export const Data = ({ isBathed }) => {
       </>
     );
   }
-};
+}
