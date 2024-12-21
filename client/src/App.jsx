@@ -1,10 +1,22 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import axios from 'axios'
 import { Data } from './components/Data'
 import { Auth } from './components/Auth'
 import { Home } from './components/Home'
 import { Germs } from './components/Germs';
 
 function App() {
+  useEffect(() => {
+    axios.defaults.withCredentials = true
+    const getCsrfToken = async () => {
+      const { data } = await axios.get(
+        `/api/csrf`
+      )
+      axios.defaults.headers.common['X-CSRF-Token'] = data.csrf_token
+    }
+    getCsrfToken()
+  }, [])
 
   return (
     <BrowserRouter>
