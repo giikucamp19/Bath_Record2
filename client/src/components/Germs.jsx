@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 // import axios from "axios";
 
 export const Germs = () => {
@@ -29,7 +31,8 @@ export const Germs = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center space-y-6 p-6">
+      <Header />
+      <div className="flex flex-col items-center space-y-6">
         <h1 className="text-2xl font-bold">
           お風呂キャンセル記録: {bathCancelDays}日
         </h1>
@@ -50,6 +53,7 @@ export const Germs = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
