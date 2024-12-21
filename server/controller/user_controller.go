@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/labstack/echo/v4"
 )
 
@@ -17,6 +18,7 @@ type IUserController interface {
 	LogIn(c echo.Context) error
 	LogOut(c echo.Context) error
 	CsrfToken(c echo.Context) error
+	GetUser(c echo.Context) error
 }
 
 type userController struct {
@@ -81,6 +83,7 @@ func (uc *userController) LogIn(c echo.Context) error {
 	cookie.HttpOnly = true
 	cookie.SameSite = http.SameSiteNoneMode
 	c.SetCookie(cookie)
+
 	return c.NoContent(http.StatusOK)
 }
 
@@ -96,6 +99,34 @@ func (uc *userController) LogOut(c echo.Context) error {
 	cookie.SameSite = http.SameSiteNoneMode
 	c.SetCookie(cookie)
 	return c.NoContent(http.StatusOK)
+}
+
+func (uc *userController) GetUser(c echo.Context) error {
+	tokenCookie, err := c.Cookie("token")
+	if err != nil {
+		return c.JSON(http.StatusUnauthorized, "No token found")
+	}
+	tokenString := tokenCookie.Value
+
+	claims := jwt.MapClaims{}
+	parsedToken, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
+		return []byte(os.Getenv("SECRET")), nil
+	})
+	if err != nil || !parsedToken.Valid {
+		return c.JSON(http.StatusUnauthorized, "Invalid token")
+	}
+
+	userIDFloat, ok := claims["user_id"].(float64)
+	if !ok {
+		return c.JSON(http.StatusUnauthorized, "Invalid token claims")
+	}
+	userID := uint(userIDFloat)
+
+	userRes, err := uc.uu.GetUserByID(userID)
+	if err != nil {
+		return c.JSON(http.StatusInternalServerError, err.Error())
+	}
+	return c.JSON(http.StatusOK, userRes)
 }
 
 func (uc *userController) CsrfToken(c echo.Context) error {
