@@ -4,19 +4,18 @@ import { Data } from "./components/Data";
 import { Auth } from "./components/Auth";
 import { Home } from "./components/Home";
 import { Germs } from "./components/Germs";
+import Setting from "./components/setting"; // 追加
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Auth コンポーネントを最初に表示 */}
         <Route path="/" element={<Auth />} />
-
-        {/* 認証が成功したら Header を表示し、その下に他のコンポーネントを表示 */}
         <Route path="/" element={<Header />}>
           <Route path="/home" element={<Home />} />
           <Route path="/germs" element={<Germs />} />
           <Route path="/data" element={<Data />} />
+          <Route path="/settings" element={<Setting />} /> {/* 追加 */}
         </Route>
       </Routes>
     </BrowserRouter>

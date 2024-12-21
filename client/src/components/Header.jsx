@@ -28,11 +28,11 @@ const Header = () => {
       {/* Footer */}
       <footer className="bg-blue-400 flex items-center justify-between px-4 py-2 fixed bottom-0 w-full z-10">
         <button className="flex flex-col items-center">
-          <img src="/path-to-home-icon.png" alt="Home" className="w-6 h-6" />
+          <img src="img/home.png" alt="Home" className="w-6 h-6" />
           <span className="text-white text-sm">Home</span>
         </button>
         <button className="flex flex-col items-center">
-          <img src="/path-to-calendar-icon.png" alt="Calendar" className="w-6 h-6" />
+          <img src="img/calendar.png" alt="Calendar" className="w-6 h-6" />
           <span className="text-white text-sm">1</span>
         </button>
       </footer>
