@@ -39,7 +39,16 @@ function calcCancelationRate(isBathed) {
 export const Data = ({ isBathed }) => {
   const filtered = isBathed.filter(d => d !== null);
   if (filtered.length === 0) {
-    return <div>まだデータがありません</div>;
+    return (
+      <>
+        <div className="text-center font-semibold">
+          <br></br>
+          <span>
+            まだデータがありません
+          </span>
+        </div>
+      </>
+    );
   }
 
   const latestState = filtered[filtered.length - 1];
@@ -47,27 +56,53 @@ export const Data = ({ isBathed }) => {
   if (latestState === true) {
     return (
       <>
-        <div>
-          今月のキャンセル率は {calcCancelationRate(filtered)}% です
+        <br></br>
+        <div className="text-center">
+          <span className='font-semibold'>
+            今月のキャンセル率{"　"}
+          </span>
+          <span className='text-3xl text-center text-red-600 font-semibold'>
+            {calcCancelationRate(filtered)}%
+          </span>
+          <br></br>
+          <span className='font-semibold'>
+            連続入浴記録{"　"}
+          </span>
+          <span className='text-3xl text-center text-green-600 font-semibold'>
+            {calcConsecutiveBathingDays(filtered)}日
+          </span>
+          <br></br>
+          <span className='text-2xl font-semibold'>
+            この調子で頑張りましょう！
+          </span>
         </div>
-        <div>
-          入浴記録 {calcConsecutiveBathingDays(filtered)}日
-          <br />
-          この調子で頑張りましょう！
-        </div>
+        <br></br>
       </>
     );
   } else {
     return (
       <>
-        <div>
-          今月のキャンセル率は {calcCancelationRate(filtered)}% です
+        <br></br>
+        <div className="text-center">
+          <span className='font-semibold'>
+            今月のキャンセル率{"　"}
+          </span>
+          <span className='text-3xl text-center text-red-600 font-semibold'>
+            {calcCancelationRate(filtered)}%
+          </span>
+          <br></br>
+          <span className='font-semibold'>
+            連続キャンセル記録{"　"}
+          </span>
+          <span className='text-3xl text-center text-red-600 font-semibold'>
+            {calcConsecutiveCancelDays(filtered)}日
+          </span>
+          <br></br>
+          <span className='text-2xl font-semibold'>
+            毎日お風呂に入りましょう...
+          </span>
         </div>
-        <div>
-          お風呂キャンセル記録 {calcConsecutiveCancelDays(filtered)}日
-          <br />
-          今日こそお風呂に入りましょう！
-        </div>
+        <br></br>
       </>
     );
   }

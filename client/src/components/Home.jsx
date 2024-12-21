@@ -52,7 +52,7 @@ export const Home = () => {
       {/* 年月表示と月の切り替えボタン */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <button onClick={() => setCurrentDate(subMonths(currentDate, 1))}>&lt;</button>
-        <h2>{format(currentDate, 'yyyy年 MM月')}</h2>
+        <h2 className='text-2xl font-semibold'>{format(currentDate, 'yyyy年 MM月')}</h2>
         <button onClick={() => setCurrentDate(addMonths(currentDate, 1))}>&gt;</button>
       </div>
 
