@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
 // 連続入浴記録を計算
 function calcConsecutiveBathingDays(isBathed) {
@@ -28,24 +28,22 @@ function calcConsecutiveCancelDays(isBathed) {
 
 // キャンセル率を計算
 function calcCancelationRate(isBathed) {
-  const filtered = isBathed.filter(d => d !== null);
-  if (filtered.length === 0) return 0; 
+  const filtered = isBathed.filter((d) => d !== null);
+  if (filtered.length === 0) return 0;
   let totalDays = filtered.length;
-  let totalCancelDays = filtered.filter(d => d === false).length;
+  let totalCancelDays = filtered.filter((d) => d === false).length;
   let cancelationRate = Math.floor(100 * (totalCancelDays / totalDays));
   return cancelationRate;
 }
 
 export const Data = ({ isBathed, setConsecutiveCancelDays }) => {
-  const filtered = isBathed.filter(d => d !== null);
+  const filtered = isBathed.filter((d) => d !== null);
   if (filtered.length === 0) {
     return (
       <>
         <div className="text-center font-semibold">
           <br></br>
-          <span>
-            まだデータがありません
-          </span>
+          <span>まだデータがありません</span>
         </div>
       </>
     );
@@ -63,68 +61,70 @@ export const Data = ({ isBathed, setConsecutiveCancelDays }) => {
   if (latestState === true) {
     return (
       <>
-        <br></br>
-        <div className="flex justify-center items-center">
-          <span className='font-semibold'>
-            今月のキャンセル率{"　"}
-          </span>
-          <div className="relative w-48 h-48">
-            <div className="absolute inset-0 rounded-full" 
-              style={{ background: `conic-gradient( #f08080 ${cancelationRate * 3.6}deg, #e0e0e0 ${cancelationRate * 3.6}deg ${360 - cancelationRate * 3.6}deg )` }}>
-            </div> 
+        <div className="flex justify-center items-center flex-col">
+          <span className="font-semibold">今月のキャンセル率は...{"　"}</span>
+          <div className="relative w-36 h-36">
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: `conic-gradient( #f08080 ${
+                  cancelationRate * 3.6
+                }deg, #e0e0e0 ${cancelationRate * 3.6}deg ${
+                  360 - cancelationRate * 3.6
+                }deg )`,
+              }}
+            ></div>
             <div className="absolute inset-0 flex justify-center items-center text-xl font-semibold text-gray-800">
-              {cancelationRate}% 
+              {cancelationRate}%
             </div>
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <span className='font-semibold'>
-            連続入浴記録{"　"}
-          </span>
-          <span className='text-3xl text-center text-green-600 font-semibold'>
+          <span className="font-semibold">連続入浴記録{"　"}</span>
+          <span className="text-3xl text-center text-green-600 font-semibold">
             {consecutiveBathingDays}日
           </span>
         </div>
         <div className="flex justify-center items-center">
-          <span className='text-2xl font-semibold'>
+          <span className="text-2xl font-semibold">
             この調子で頑張りましょう！
           </span>
         </div>
-        <br></br>
       </>
     );
   } else {
     return (
       <>
-        <br></br>
-        <div className="flex justify-center items-center">
-          <span className='font-semibold'>
-            今月のキャンセル率{"　"}
-          </span>
-          <div className="relative w-48 h-48">
-            <div className="absolute inset-0 rounded-full" 
-              style={{ background: `conic-gradient( #f08080 ${cancelationRate * 3.6}deg, #e0e0e0 ${cancelationRate * 3.6}deg ${360 - cancelationRate * 3.6}deg )` }}>
-            </div> 
+        <div className="flex justify-center items-center flex-col">
+          <span className="font-semibold">今月のキャンセル率は...{"　"}</span>
+          <div className="relative w-36 h-36">
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: `conic-gradient( #f08080 ${
+                  cancelationRate * 3.6
+                }deg, #e0e0e0 ${cancelationRate * 3.6}deg ${
+                  360 - cancelationRate * 3.6
+                }deg )`,
+              }}
+            ></div>
             <div className="absolute inset-0 flex justify-center items-center text-xl font-semibold text-gray-800">
-              {cancelationRate}% 
+              {cancelationRate}%
             </div>
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <span className='font-semibold'>
-            連続キャンセル日数{"　"}
-          </span>
-          <span className='text-3xl text-center text-red-600 font-semibold'>
+          <span className="font-semibold">連続キャンセル日数{"　"}</span>
+          <span className="text-3xl text-center text-red-600 font-semibold">
             {consecutiveCancelDays}日
           </span>
         </div>
         <div className="flex justify-center items-center">
-          <span className='text-2xl font-semibold'>
+          <span className="text-2xl font-semibold">
             毎日お風呂に入りましょう...
           </span>
         </div>
-        <br></br>
       </>
     );
   }
-}
+};
