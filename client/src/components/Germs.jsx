@@ -1,19 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+// import axios from "axios";
 
 export const Germs = () => {
   //お風呂キャンセル日数を保持する変数
   const bathCancelDays = 1;
   // const [bathCancelDays, setBathCancelDays] = useState(7);
-  //キャンセルした日数によって表示する菌のstate
-  const [germ, setGerm] = useState(0);
+  //キャンセルした日数によって表示する菌の数
+  const germ = useMemo(() => bathCancelDays * 10, [bathCancelDays]);
+  // アカウント名
+  // const name = useRef();
+  // アカウントアイコン
+  // const icon = useRef();
+
+  // バックエンドからアカウント名とアイコンを取得する処理
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get("/api/endpoint");
+  //     name.current = response.data.name;
+  //     icon.current = response.data.icon;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
-    setGerm(bathCancelDays * 10);
-  }, [bathCancelDays]);
+    // fetchData();
+  }, [germ]);
 
   return (
     <div>
-      <div className="flex flex-col items-center space-y-6 p-6">
+      <Header />
+      <div className="flex flex-col items-center space-y-6">
         <h1 className="text-2xl font-bold">
           お風呂キャンセル記録: {bathCancelDays}日
         </h1>
@@ -34,6 +53,7 @@ export const Germs = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
