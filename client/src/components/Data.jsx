@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 // 連続入浴記録を計算
 function calcConsecutiveBathingDays(isBathed) {
@@ -36,7 +36,7 @@ function calcCancelationRate(isBathed) {
   return cancelationRate;
 }
 
-export const Data = ({ isBathed }) => {
+export const Data = ({ isBathed, setConsecutiveCancelDays }) => {
   const filtered = isBathed.filter(d => d !== null);
   if (filtered.length === 0) {
     return (
@@ -55,6 +55,10 @@ export const Data = ({ isBathed }) => {
   const consecutiveBathingDays = calcConsecutiveBathingDays(filtered);
   const consecutiveCancelDays = calcConsecutiveCancelDays(filtered);
   const cancelationRate = calcCancelationRate(filtered);
+
+  useEffect(() => {
+    setConsecutiveCancelDays(consecutiveCancelDays);
+  }, [consecutiveCancelDays, setConsecutiveCancelDays]);
 
   if (latestState === true) {
     return (

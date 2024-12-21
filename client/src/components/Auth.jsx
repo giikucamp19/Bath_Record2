@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { CheckBadgeIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
+import { ArrowPathIcon } from '@heroicons/react/24/solid';
 import { useMutateAuth } from '../hooks/useMutateAuth';
+import { MdBathtub } from "react-icons/md";
+import '../App.css';
 
 export const Auth = () => {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
   const [accountName, setAccountName] = useState('');
-  const [icon, setIcon] = useState(null);
-  const [preview, setPreview] = useState(null);
+  const [iconImage, setIconImage] = useState('');
+  const [preview, setPreview] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const { loginMutation, registerMutation } = useMutateAuth();
 
@@ -24,7 +26,7 @@ export const Auth = () => {
           email: email,
           password: pw,
           accountName: accountName,
-          icon: icon,
+          iconImage: iconImage,
         })
         .then(() =>
           loginMutation.mutate({
@@ -37,7 +39,7 @@ export const Auth = () => {
 
   const handleIconChange = (e) => {
     const file = e.target.files[0];
-    setIcon(file);
+    setIconImage(file);
     if (file) {
       setPreview(URL.createObjectURL(file));
     } else {
@@ -48,8 +50,8 @@ export const Auth = () => {
   return (
     <div className="flex justify-center items-center flex-col min-h-screen text-grey-600 font-mono">
       <div className="flex items-center">
-        <CheckBadgeIcon className="h-8 w-8 mr-2 text-blue-500" />
-        <span className="text-center text-3xl font-extrabold">Bath Record</span>
+        <MdBathtub  className="h-8 w-8 mr-2 text-blue-500" />
+        <span className="rainbow-text text-center text-3xl font-extrabold">Bath Record</span>
       </div>
       <h2 className="my-6">{isLogin ? 'Login' : 'Create a new account'}</h2>
       <form onSubmit={handleSubmit}>

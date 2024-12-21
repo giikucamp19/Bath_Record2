@@ -31,8 +31,8 @@ export const useMutateAuth = () => {
       formData.append('email', user.email);
       formData.append('password', user.password);
       formData.append('accountName', user.accountName);
-      if (user.icon) {
-        formData.append('icon', user.icon); 
+      if (user.iconImage) {
+        formData.append('iconImage', user.iconImage); 
       }
       const response = await axios.post(`/api/signup`, formData, {
           headers: {

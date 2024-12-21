@@ -5,7 +5,7 @@ import { Data } from './Data';
 // 曜日の配列
 const weekdays = ['月', '火', '水', '木', '金', '土', '日'];
 
-export const Home = () => {
+export const Home = ({ setConsecutiveCancelDays }) => {
   const [currentDate, setCurrentDate] = useState(new Date()); // 現在の年月を管理
   const [selectedDate, setSelectedDate] = useState(null); // 選択した日付
   const [marks, setMarks] = useState(() => {
@@ -57,7 +57,7 @@ export const Home = () => {
       </div>
 
       {/* DataコンポーネントへisBathedを渡す */}
-      <Data isBathed={isBathed} />
+      <Data isBathed={isBathed} setConsecutiveCancelDays={setConsecutiveCancelDays}/>
 
       {/* 曜日ヘッダー */}
       <div
