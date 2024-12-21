@@ -2,6 +2,7 @@
 // import axios from "axios";
 import { Cog8ToothIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import { MdBathtub } from "react-icons/md";
 
 export const Header = () => {
   // アカウント名
@@ -25,11 +26,16 @@ export const Header = () => {
   // }, []);s
   return (
     <div>
-      <header className="bg-blue-400 flex items-center justify-between px-4 py-2 mb-8">
+      <header className="bg-blue-400 flex items-center px-4 py-2 mb-8">
         <h1 className="text-white text-lg font-bold">お風呂記録アプリ</h1>
-        <Link to="/Setting">
-          <Cog8ToothIcon className="h-6 w-6 my-2 text-black-500" />
-        </Link>
+        <div className="flex items-center ml-auto space-x-4">
+          <Link to="/Germs">
+            <MdBathtub />
+          </Link>
+          <Link to="/Setting">
+            <Cog8ToothIcon className="h-6 w-6 my-2 text-black-500" />
+          </Link>
+        </div>
       </header>
     </div>
   );
