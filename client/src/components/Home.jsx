@@ -60,13 +60,20 @@ export const Home = () => {
   return (
     <div>
       <Header />
-      <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
+      <Data isBathed={isBathed} />
+      <div
+        style={{
+          padding: "20px",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
         {/* 年月表示と月の切り替えボタン */}
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             alignItems: "center",
+            margin: "10px 0",
           }}
         >
           <button onClick={() => setCurrentDate(subMonths(currentDate, 1))}>
@@ -80,57 +87,51 @@ export const Home = () => {
           </button>
         </div>
 
-        {/* DataコンポーネントへisBathedを渡す */}
-        <Data isBathed={isBathed} />
+        <div>
+          {/* 曜日ヘッダー */}
+          <div className="grid grid-cols-7 text-center font-bold my-2">
+            {weekdays.map((day, index) => (
+              <div
+                key={day}
+                className={`
+                border p-4
+                ${index === 5 ? "bg-blue-400 text-black" : ""} 
+                ${index === 6 ? "bg-red-400 text-black" : ""}`}
+              >
+                {day}
+              </div>
+            ))}
+          </div>
 
-        {/* 曜日ヘッダー */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(7, 1fr)",
-            textAlign: "center",
-            fontWeight: "bold",
-          }}
-        >
-          {weekdays.map((day) => (
-            <div key={day}>{day}</div>
-          ))}
-        </div>
-
-        {/* 日付の表示 */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(7, 1fr)",
-            gap: "5px",
-          }}
-        >
-          {days.map((day, index) => (
-            <div
-              key={index}
-              style={{
-                border: day ? "1px solid #ccc" : "none",
-                borderRadius: "5px",
-                padding: "10px",
-                textAlign: "center",
-                backgroundColor:
-                  day && marks[format(day, "yyyy-MM-dd")] === "○"
-                    ? "#d1e7dd"
-                    : day && marks[format(day, "yyyy-MM-dd")] === "×"
-                    ? "#f8d7da"
-                    : "#fff",
-                cursor: day ? "pointer" : "default",
-              }}
-              onClick={() => day && setSelectedDate(day)}
-            >
-              {day ? day.getDate() : ""}
-              {day && (
-                <div style={{ marginTop: "5px", fontSize: "18px" }}>
-                  {marks[format(day, "yyyy-MM-dd")] || ""}
-                </div>
-              )}
-            </div>
-          ))}
+          {/* 日付の表示 */}
+          <div className="grid grid-cols-7 gap-1 border p-4">
+            {days.map((day, index) => (
+              <div
+                key={index}
+                style={{
+                  border: day ? "1px solid #ccc" : "none",
+                  borderRadius: "5px",
+                  padding: "10px",
+                  textAlign: "center",
+                  backgroundColor:
+                    day && marks[format(day, "yyyy-MM-dd")] === "○"
+                      ? "#d1e7dd"
+                      : day && marks[format(day, "yyyy-MM-dd")] === "×"
+                      ? "#f8d7da"
+                      : "#fff",
+                  cursor: day ? "pointer" : "default",
+                }}
+                onClick={() => day && setSelectedDate(day)}
+              >
+                {day ? day.getDate() : ""}
+                {day && (
+                  <div style={{ marginTop: "5px", fontSize: "18px" }}>
+                    {marks[format(day, "yyyy-MM-dd")] || ""}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* マーク入力用のモーダル */}
