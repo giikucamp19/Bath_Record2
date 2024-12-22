@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
 import axios from "axios";
 import '../App.css';
 
 export const Germs = ({ consecutiveCancelDays }) => {
+
   // キャンセルした日数によって表示する菌の数
   const germCount = useMemo(() => consecutiveCancelDays * 10, [consecutiveCancelDays]);
 
@@ -19,8 +19,10 @@ export const Germs = ({ consecutiveCancelDays }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/user");
+
       setName(response.data.accountname);
       setIcon(response.data.iconimage);
+
     } catch (error) {
       console.log(error);
     }
@@ -80,6 +82,7 @@ export const Germs = ({ consecutiveCancelDays }) => {
   // Base64画像 -> dataURL
   const iconSrc = icon ? `data:image/png;base64,${icon}` : null;
 
+
   return (
     <div>
       <Header />
@@ -89,8 +92,10 @@ export const Germs = ({ consecutiveCancelDays }) => {
           余命: <span style={{ color: "red" }}>{30-consecutiveCancelDays}日</span>
         </h1>
 
+
         {/* アカウント情報 */}
         <h1 className="rainbow-text text-lg font-semibold">{name}</h1>
+
         {iconSrc ? (
           <img
             src={iconSrc}
@@ -100,6 +105,7 @@ export const Germs = ({ consecutiveCancelDays }) => {
         ) : (
           <p>No Icon Image</p>
         )}
+
 
         {/* 絶対配置した菌を描画 */}
         {germData.map((g, index) => {
