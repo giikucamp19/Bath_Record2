@@ -51,7 +51,7 @@ export const Auth = () => {
     <div className="flex justify-center items-center flex-col min-h-screen text-grey-600 font-mono">
       <div className="flex items-center">
         <MdBathtub  className="h-8 w-8 mr-2 text-blue-500" />
-        <span className="rainbow-text text-center text-3xl font-extrabold">Bath Record</span>
+        <span className="rainbow-text text-center text-3xl font-extrabold">アンチお風呂キャンセル界隈</span>
       </div>
       <h2 className="my-6">{isLogin ? 'Login' : 'Create a new account'}</h2>
       <form onSubmit={handleSubmit}>
@@ -91,7 +91,7 @@ export const Auth = () => {
               />
             </div>
             <div>
-            <div className="">icon</div>
+            <div className="">your icon</div>
               <input
                 className="mb-3 px-3 text-sm py-2 border border-grey-300"
                 name="icon"
