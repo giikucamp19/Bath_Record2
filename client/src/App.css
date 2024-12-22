@@ -16,3 +16,9 @@
   -webkit-text-fill-color: transparent;
   animation: rainbow 5s linear infinite;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}

@@ -6,6 +6,7 @@ import { Auth } from './components/Auth'
 import { Home } from './components/Home'
 import { Germs } from './components/Germs';
 import { Setting } from './components/Setting';
+import { End } from './components/End';
 
 function App() {
   const [consecutiveCancelDays, setConsecutiveCancelDays] = useState(0);
@@ -28,6 +29,7 @@ function App() {
         <Route path="/home" element={<Home setConsecutiveCancelDays={setConsecutiveCancelDays}/>} />
         <Route path="/germs" element={<Germs consecutiveCancelDays={consecutiveCancelDays}/>} />
         <Route path="/data" element={<Data/>} />
+        <Route path="/end" element={<End />} />
         <Route path="/Setting" element={<Setting/>} />
       </Routes>
     </BrowserRouter>

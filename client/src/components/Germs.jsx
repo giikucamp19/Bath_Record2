@@ -2,6 +2,8 @@ import { useState, useEffect, useMemo } from "react";
 import { Header } from "./Header";
 import axios from "axios";
 import '../App.css';
+import { useNavigate } from "react-router-dom";
+
 
 export const Germs = ({ consecutiveCancelDays }) => {
 
@@ -14,6 +16,7 @@ export const Germs = ({ consecutiveCancelDays }) => {
 
   // 「菌」オブジェクトを配列で管理
   const [germData, setGermData] = useState([]);
+  const navigate = useNavigate();
 
   // バックエンドからユーザー情報を取得
   const fetchData = async () => {
@@ -78,6 +81,13 @@ export const Germs = ({ consecutiveCancelDays }) => {
 
     return () => clearInterval(updateInterval);
   }, []);
+
+  useEffect(() => {
+     if (30 - consecutiveCancelDays <= 0) {
+       // 遷移
+       navigate("/end");
+     }
+   }, [consecutiveCancelDays, navigate]);
 
   // Base64画像 -> dataURL
   const iconSrc = icon ? `data:image/png;base64,${icon}` : null;
