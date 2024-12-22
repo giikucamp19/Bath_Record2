@@ -131,7 +131,6 @@ export const Germs = ({ consecutiveCancelDays }) => {
           );
         })}
       </div>
-      <Footer />
     </div>
   );
 };
