@@ -28,7 +28,7 @@ export const Header = () => {
   return (
     <div>
       <header className="bg-blue-400 flex items-center px-4 py-2 mb-8">
-        <h1 className="text-white text-lg font-bold">お風呂記録アプリ</h1>
+        <h1 className="text-white font-kosugi">アンチお風呂キャンセル界隈</h1>
         <div className="flex items-center ml-auto space-x-4">
           <Link to="/home">
             <CalendarIcon className="h-6 w-6 my-2 text-black-500" />
