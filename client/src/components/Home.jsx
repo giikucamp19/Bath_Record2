@@ -10,7 +10,6 @@ import {
 } from "date-fns";
 import { Data } from "./Data";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
 
 // 曜日の配列
 const weekdays = ["月", "火", "水", "木", "金", "土", "日"];
@@ -191,7 +190,6 @@ export const Home = ({ setConsecutiveCancelDays }) => {
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 };
