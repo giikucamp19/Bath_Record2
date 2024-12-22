@@ -91,6 +91,7 @@ export const Auth = () => {
               />
             </div>
             <div>
+            <div className="">icon</div>
               <input
                 className="mb-3 px-3 text-sm py-2 border border-grey-300"
                 name="icon"
